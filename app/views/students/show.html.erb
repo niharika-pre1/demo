@@ -1,0 +1,12 @@
+<%= image_tag @student.profile_image,style: "width:500px;height:300px" %>
+<p>
+  <strong>name:</strong>
+  <%= @student.name %>
+</p>
+ 
+<p>
+  <strong>rollno:</strong>
+  <%= @student.rollno %>
+</p>
+<%= link_to 'Edit', edit_student_path(@student) %> 
+<%= link_to 'Back', students_path %>

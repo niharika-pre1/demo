@@ -1,0 +1,58 @@
+after_touch do |student|
+    puts "You have touched an object"
+  end
+
+  after_initialize do |student|
+    puts "You have initialized an object!"
+  end
+ 
+  after_find do |student|
+    puts "You have found an object!"
+  end
+
+  validates :rollno, presence: true
+ 
+  before_validation :ensure_login_has_a_value
+  private
+    def ensure_login_has_a_value
+      if name.nil?
+        self.name = rollno unless rollno.blank?
+      end
+    end
+
+  before_create do
+    self.name = name.capitalize if name.present?
+  end
+     
+  after_touch do |student|
+    puts "You have touched an object"
+  end
+
+ before_save :call_line,
+    if: Proc.new { |student| student.present? }
+  end
+  def call_line
+    puts "hello goodmorning"
+  end
+  
+   after_commit :log_user_saved_to_db, on: [:create, :update]
+  private
+  def log_user_saved_to_db
+    puts 'Student was saved to database'
+  end
+
+  before_save do
+    puts 'before save'
+  end
+
+
+  after_save do
+      puts 'after_save'
+  end
+
+after_commit :hello
+ def hello
+  if name == "niharika"
+    puts "name is niharika"
+  end
+ end
